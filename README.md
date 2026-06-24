@@ -1,8 +1,6 @@
 # 🚀 InternTrack AI
 
-<p align="center">
-  <img src="./public/logo.png" width="120" alt="InternTrack AI Logo" />
-</p>
+
 
 <p align="center">
   <b>An AI-powered Job Application Tracking System built with Next.js, Prisma, PostgreSQL, Gemini AI & NextAuth.</b>
