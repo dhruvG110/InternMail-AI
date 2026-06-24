@@ -292,11 +292,6 @@ npm run build
 
 ### Dhruv Gupta
 
-GitHub
-
-LinkedIn
-
-Portfolio
 
 ---
 
