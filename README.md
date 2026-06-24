@@ -7,6 +7,7 @@
 <p align="center">
   <b>An AI-powered Job Application Tracking System built with Next.js, Prisma, PostgreSQL, Gemini AI & NextAuth.</b>
 </p>
+<img width="1919" height="997" alt="image" src="https://github.com/user-attachments/assets/a7ffa516-8a6c-4977-ac01-480955ac7355" />
 
 <p align="center">
 
@@ -25,7 +26,7 @@
 
 ## 🌐 Live Demo
 
-🔗 **Website:** YOUR_DEPLOYED_URL
+🔗 **Website:** https://intern-mail-ai.vercel.app/
 
 ---
 
@@ -96,26 +97,7 @@ Powered by **Google Gemini 2.5 Flash**
 - Improvement Suggestions
 - ATS Recommendations
 
----
 
-### AI Cover Letter Generator
-
-Generate personalized cover letters based on:
-
-- Resume
-- Job Role
-- Company
-
----
-
-### AI Follow-up Generator
-
-Generate
-
-- Professional Email Follow-ups
-- LinkedIn Follow-ups
-
----
 
 ### AI Insights
 
@@ -194,49 +176,42 @@ Receive intelligent insights about:
 
 ## Landing Page
 
-> Add Screenshot Here
+<img width="1918" height="998" alt="image" src="https://github.com/user-attachments/assets/4cd73efb-eab8-4d39-841c-be9591681213" />
+
 
 ---
 
 ## Dashboard
 
-> Add Screenshot Here
+<img width="1913" height="993" alt="image" src="https://github.com/user-attachments/assets/dd37345f-4cc5-4cad-9c09-7795a58419f8" />
 
 ---
 
 ## Applications
 
-> Add Screenshot Here
+<img width="1918" height="999" alt="image" src="https://github.com/user-attachments/assets/779b711f-3a4b-491c-b33f-d6e78f618808" />
+
 
 ---
 
 ## Analytics
 
-> Add Screenshot Here
+<img width="1919" height="999" alt="image" src="https://github.com/user-attachments/assets/da203ed4-265f-44e8-849b-7c189e7af044" />
+
 
 ---
 
 ## AI Coach
 
-> Add Screenshot Here
+<img width="1918" height="994" alt="image" src="https://github.com/user-attachments/assets/2a9e5e1c-f84c-413c-a3b9-09bd56b9d38c" />
+
 
 ---
 
-## AI Resume Analysis
-
-> Add Screenshot Here
 
 ---
 
-## AI Follow-up
 
-> Add Screenshot Here
-
----
-
-## Profile
-
-> Add Screenshot Here
 
 ---
 
