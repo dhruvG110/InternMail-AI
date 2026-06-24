@@ -21,6 +21,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { redirect } from "next/navigation";
 export default function MarketingPage() {
   const { data: session } = useSession();
   const isLoggedIn = !!session?.user;
@@ -970,6 +971,7 @@ export default function MarketingPage() {
                   (item) => (
                     <motion.li
                       key={item}
+                      onClick={redirect('/login')}
                       whileHover={{ x: 3, color: "#2563eb" }}
                       className="cursor-pointer transition-colors hover:text-blue-600"
                     >
@@ -988,6 +990,7 @@ export default function MarketingPage() {
                   <motion.li
                     key={item}
                     whileHover={{ x: 3, color: "#2563eb" }}
+                    onClick={redirect('/login')}
                     className="cursor-pointer transition-colors hover:text-blue-600"
                   >
                     {item}
@@ -1004,6 +1007,7 @@ export default function MarketingPage() {
                   <motion.li
                     key={item}
                     whileHover={{ x: 3, color: "#2563eb" }}
+                    onClick={redirect('/login')}
                     className="cursor-pointer transition-colors hover:text-blue-600"
                   >
                     {item}
@@ -1020,13 +1024,13 @@ export default function MarketingPage() {
             viewport={{ once: true }}
           >
             <p>
-              © {new Date().getFullYear()} InternTrack AI. All rights reserved.
+              © Made with ❤️ by Dhruv
             </p>
             <div className="flex gap-6">
-              {["Twitter", "LinkedIn", "GitHub"].map((social) => (
+              {[ "LinkedIn", "GitHub"].map((social) => (
                 <motion.a
                   key={social}
-                  href="#"
+                  href={social  == "LinkedIn" ? "www.linkedin.com/in/dhruv-gupta-913a7b2a6" : "https://github.com/dhruvG110/InternMail-AI"}
                   className="text-gray-600 hover:text-blue-600 transition-colors font-medium text-xs"
                   whileHover={{ scale: 1.1 }}
                 >
