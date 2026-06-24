@@ -1,0 +1,212 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ApplicationStatus {
+  SAVED
+  APPLIED
+  OA
+  TECHNICAL_ROUND
+  HR_ROUND
+  FINAL_ROUND
+  INTERVIEW
+  OFFER
+  REJECTED
+  WITHDRAWN
+}
+
+enum ApplicationSource {
+  LINKEDIN
+  REFERRAL
+  CAREERS_PAGE
+  COLD_EMAIL
+  CAMPUS
+  INDEED
+  OTHER
+}
+
+enum FollowupType {
+  EMAIL
+  LINKEDIN
+  THANK_YOU
+}
+
+enum InterviewRound {
+  OA
+  TECHNICAL
+  HR
+  FINAL
+}
+
+enum InterviewStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+}
+
+enum AIGenerationType {
+  FOLLOWUP
+  INSIGHT
+  COACH
+  HEALTH_SCORE
+  COVER_LETTER
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+
+  email     String   @unique
+  password  String
+
+  role      Role
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profile Profile?
+}
+
+model Profile {
+  id                Int      @id @default(autoincrement())
+
+  email             String   @unique
+  fullName          String
+
+  avatarUrl         String?
+  targetRole        String?
+  graduationYear    Int?
+  preferredLocation String?
+
+  userId            Int      @unique
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  applications  Application[]
+  resumes       Resume[]
+  aiGenerations AIGeneration[]
+}
+model Application {
+  id Int @id @default(autoincrement())
+
+  userId Int
+  user   Profile @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  companyName String
+  roleTitle   String
+  jobUrl      String?
+  location    String?
+  status ApplicationStatus @default(APPLIED) 
+  source ApplicationSource
+
+  referralUsed Boolean @default(false)
+
+  resumeId Int?
+  resume   Resume? @relation(fields: [resumeId], references: [id])
+
+  appliedDate DateTime
+
+  lastFollowupDate DateTime?
+  followupCount    Int       @default(0)
+
+  salaryRange String?
+  notes       String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  followups     Followup[]
+  interviews    Interview[]
+  aiGenerations AIGeneration[]
+
+  @@index([userId])
+  @@index([userId, status])
+}
+
+model Resume {
+  id Int @id @default(autoincrement())
+
+  userId Int
+  user   Profile @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  name    String
+  version String?
+
+  fileUrl String
+
+  isDefault Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  applications Application[]
+}
+
+model Followup {
+  id Int @id @default(autoincrement())
+
+  applicationId Int
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  type FollowupType
+
+  content String
+
+  sent Boolean @default(false)
+
+  createdAt DateTime @default(now())
+}
+
+model Interview {
+  id Int @id @default(autoincrement())
+
+  applicationId Int
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  interviewDate DateTime
+
+  round InterviewRound
+
+  status InterviewStatus @default(SCHEDULED)
+
+  feedback String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AIGeneration {
+  id Int @id @default(autoincrement())
+
+  userId Int
+  user   Profile @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  applicationId Int?
+  application   Application? @relation(fields: [applicationId], references: [id])
+
+  type AIGenerationType
+
+  prompt   String
+  response String
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, type, prompt])
+  @@index([userId, createdAt])
+}
