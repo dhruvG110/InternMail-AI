@@ -25,7 +25,7 @@ export default function MarketingPage() {
   const { data: session } = useSession();
   const isLoggedIn = !!session?.user;
   return (
-    <main className="min-h-screen bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30 text-gray-900 overflow-hidden">
+    <main className="min-h-screen bg-white text-gray-900 overflow-hidden">
       {/* Animated Background Gradient */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute left-1/2 top-20 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-blue-200/30 blur-3xl animate-pulse" />
