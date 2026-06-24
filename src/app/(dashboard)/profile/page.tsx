@@ -5,7 +5,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,39 +21,41 @@ import { Skeleton } from "@/components/ui/skeleton";
 const profileSchema = z.object({
   fullName: z.string().min(1, "Full name is required"),
   targetRole: z.string().optional(),
-  graduationYear: z.string().optional().transform(v => v ? parseInt(v) : undefined),
+  graduationYear: z.coerce.number().optional(),
   preferredLocation: z.string().optional(),
   avatarUrl: z.string().optional(),
 });
 
-type ProfileFormValues = z.infer<typeof profileSchema>;
+type ProfileFormInput = z.input<typeof profileSchema>;
+type ProfileFormOutput = z.output<typeof profileSchema>;
+
 
 export default function ProfilePage() {
   const { data: profileData, isLoading } = useProfile();
   const { mutate: updateProfile, isPending } = useUpdateProfile();
 
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<ProfileFormValues>({
-    resolver: zodResolver(profileSchema),
-  });
+  register,
+  handleSubmit,
+  formState: { errors },
+  reset,
+} = useForm<ProfileFormInput, any, ProfileFormOutput>({
+  resolver: zodResolver(profileSchema),
+});
 
   useEffect(() => {
     if (profileData?.profile) {
       reset({
         fullName: profileData.profile.fullName,
-        targetRole: profileData.profile.targetRole || "",
-        graduationYear: profileData.profile.graduationYear?.toString() || "",
-        preferredLocation: profileData.profile.preferredLocation || "",
-        avatarUrl: profileData.profile.avatarUrl || "",
+        targetRole: profileData.profile.targetRole ?? "",
+        graduationYear: profileData.profile.graduationYear ?? undefined,
+        preferredLocation: profileData.profile.preferredLocation ?? "",
+        avatarUrl: profileData.profile.avatarUrl ?? "",
       });
     }
   }, [profileData, reset]);
 
-  const onSubmit = (data: ProfileFormValues) => {
+  const onSubmit = (data: ProfileFormOutput) => {
     updateProfile(data);
   };
 
@@ -59,7 +67,9 @@ export default function ProfilePage() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">Profile</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
+          Profile
+        </h1>
         <p className="mt-2 text-sm sm:text-base text-slate-500 dark:text-slate-400">
           Manage your profile information and preferences.
         </p>
@@ -95,7 +105,9 @@ export default function ProfilePage() {
                     {...register("fullName")}
                   />
                   {errors.fullName && (
-                    <p className="text-sm text-red-500">{errors.fullName.message}</p>
+                    <p className="text-sm text-red-500">
+                      {errors.fullName.message}
+                    </p>
                   )}
                 </div>
 
