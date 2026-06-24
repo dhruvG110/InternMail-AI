@@ -971,7 +971,7 @@ export default function MarketingPage() {
                   (item) => (
                     <motion.li
                       key={item}
-                      onClick={redirect('/login')}
+                      onClick={()=>redirect('/login')}
                       whileHover={{ x: 3, color: "#2563eb" }}
                       className="cursor-pointer transition-colors hover:text-blue-600"
                     >
